@@ -14,7 +14,8 @@ class Comments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Likes(models.Model):
-    pass
+    username = models.CharField(max_length=100)
+    post = models.ManyToManyField(Task)
 
 class Bookmark(models.Model):
     pass

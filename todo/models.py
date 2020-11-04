@@ -10,9 +10,21 @@ class Task(models.Model):
 
 
 class Comments(models.Model):
+    '''Comment model class '''
     comment = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.comment
+
+    def save_comment(self):
+        '''method  to save a comment'''
+        self.save()
+
+    def delete_comment(self):
+        '''method to save a comment'''
+        self.delete()
 
 class Likes(models.Model):
     pass

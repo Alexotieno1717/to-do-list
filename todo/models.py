@@ -12,6 +12,7 @@ class Task(models.Model):
 class Comments(models.Model):
     comment = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
 class Likes(models.Model):
     pass

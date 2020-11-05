@@ -34,4 +34,19 @@ class Likes(models.Model):
     pass
 
 class Bookmark(models.Model):
-    pass
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    bookmark = models.TextField()
+
+    def __str__(self):
+        return self.bookmark
+
+    def save_bookmark(self):
+        self.save()
+
+    def delete_bookmark(self):
+        self.delete()
+
+
+
+    

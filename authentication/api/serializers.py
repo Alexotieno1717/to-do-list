@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from authentication.models import Profile
 
+
 class RegistrationSerializer(serializers.ModelSerializer):
     """
     creating registration serializer
@@ -26,3 +27,4 @@ class RegistrationSerializer(serializers.ModelSerializer):
         authentication.set_password(password)
         authentication.save()
         return authentication
+

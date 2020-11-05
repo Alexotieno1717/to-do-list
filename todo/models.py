@@ -1,6 +1,6 @@
 from django.db import models
 import datetime as dt
-from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 class Task(models.Model):
@@ -12,7 +12,7 @@ class Task(models.Model):
 class Comments(models.Model):
     '''Comment model class '''
     comment = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
     def __str__(self):

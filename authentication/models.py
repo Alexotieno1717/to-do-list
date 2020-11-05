@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager,PermissionsMixin
 
 # Create your models here.
-class UserProfileManager(BaseUserManager):
+class UserAccountManager(BaseUserManager):
 	"""
 	Helps Django work with our custom user model
 	"""
@@ -44,7 +44,7 @@ class UserProfileManager(BaseUserManager):
 		return user
 
 
-class Profile(AbstractBaseUser,PermissionsMixin):
+class Accounts(AbstractBaseUser,PermissionsMixin):
 	"""Represents a "user profile" inside our system."""
 
 	email			= models.CharField(max_length=100,verbose_name="email",unique=True)
@@ -56,7 +56,7 @@ class Profile(AbstractBaseUser,PermissionsMixin):
 	is_staff		= models.BooleanField(default=False)
 	is_superuser	= models.BooleanField(default=False)
 
-	objects = UserProfileManager()
+	objects = UserAccountManager()
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = ['username']
@@ -68,10 +68,9 @@ class Profile(AbstractBaseUser,PermissionsMixin):
 	def get_full_name(self):
 		"""used to get users full name."""
 
-		return self.name
+		return self.username
 
 	def get_short_name(self):
 		"""Used to get a users short name"""
 
-		return self.name
-    
+		return self.username

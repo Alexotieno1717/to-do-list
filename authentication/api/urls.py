@@ -6,5 +6,5 @@ from authentication.api.views import (
 app_name = "authentication"
 
 urlpatterns = [
-    path('register',registration_view, name="register")
+    path('register',registration_view, name="register"),
 ]

@@ -74,3 +74,7 @@ class Accounts(AbstractBaseUser,PermissionsMixin):
 		"""Used to get a users short name"""
 
 		return self.username
+
+	class Meta:
+		verbose_name = 'Account'
+		verbose_name_plural = 'Accounts'

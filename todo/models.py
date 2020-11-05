@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Task(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    time = models.DateTimeField(auto_add_now=True)
+    time = models.DateTimeField(auto_now_add=True)
 
 
 class Comments(models.Model):

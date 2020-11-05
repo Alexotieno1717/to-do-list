@@ -1,22 +1,18 @@
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from .models import Task
 
 class TaskSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = Task
-        fields = ['id', 'title', 'description', 'time']
+        fields = ['id', 'owner', 'title', 'description', 'time']
+        
 
-    def create(self, validated_data):
-        """
-        Create and return a new `Snippet` instance, given the validated data.
-        """
-        return Task.objects.create(**validated_data)
+class UserSerializer(serializers.ModelSerializer):
+    snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=Task.objects.all())
 
-    def update(self, instance, validated_data):
-        """
-        Update and return an existing `Snippet` instance, given the validated data.
-        """
-        instance.title = validated_data.get('title', instance.title)
-        instance.description = validated_data.get('description', instance.description)
-        instance.save()
-        return instance
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'snippets']

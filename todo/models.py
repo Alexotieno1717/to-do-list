@@ -30,8 +30,9 @@ class Comments(models.Model):
         '''method to save a comment'''
         self.delete()
 
-class Likes(models.Model):
-    pass
+class TaskLikes(models.Model):
+    likeusers = models.ManyToManyField(User)
+    liketask = models.ForeignKey(Task,on_delete=models.CASCADE,null=True,related_name='liketask')
 
 class Bookmark(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -1,13 +1,12 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Task,Comments
-from .models import Task
+from .models import Task,Comments, TaskLikes
 
 
 
 class TasklikeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tasklike
+        model = TaskLikes
         fields = '__all__'
 
 
@@ -32,5 +31,5 @@ class CommentsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comments
-        fields = ['comment','user','task']
+        fields = ['comment', 'owner','task']
 

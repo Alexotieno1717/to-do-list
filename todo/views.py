@@ -12,7 +12,7 @@ from rest_framework import generics
 from todo.serializers import UserSerializer,CommentsSerializer
 from rest_framework import permissions
 from todo.permissions import IsOwnerOrReadOnly
-
+from rest_framework.views import APIView
 from django.contrib.auth.models import User
 
 
@@ -56,12 +56,13 @@ class CommentsDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comments.objects.all()
     serializer_class = CommentsSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
-    class LikeListCreate(APIView):
+
+class LikeListCreate(APIView):
 
     def get(self,request,pk):
         task = Task.objects.filter(pk=pk)
-        like_count = task.likepost.count()
-        serializer = TaskSerializer(like_count,many=True)
+        # like_count = task.likepost.count()
+        serializer = TaskSerializer(many=True)
         return Response(serializer.data)
 
     def task(self,request,pk):

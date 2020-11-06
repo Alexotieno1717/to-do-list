@@ -7,7 +7,7 @@ class Task(models.Model):
     title = models.CharField(max_length=100, blank=True, default='')
     description = models.TextField()
     time = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey('auth.User', related_name='snippets', on_delete=models.CASCADE)
+    owner = models.ForeignKey('auth.User', null=True, related_name='snippets', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -16,8 +16,8 @@ class Task(models.Model):
 class Comments(models.Model):
     '''Comment model class '''
     comment = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.comment
@@ -32,11 +32,11 @@ class Comments(models.Model):
 
 class TaskLikes(models.Model):
     likeusers = models.ManyToManyField(User)
-    liketask = models.ForeignKey(Task,on_delete=models.CASCADE,null=True,related_name='liketask')
+    liketask = models.ForeignKey(Task, on_delete=models.CASCADE,null=True,related_name='liketask')
 
 class Bookmark(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, null=True, on_delete=models.CASCADE)
     bookmark = models.TextField()
 
     def __str__(self):
